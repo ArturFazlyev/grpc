@@ -31,7 +31,7 @@ public final class GreetingServiceGrpc {
   public static final io.grpc.MethodDescriptor<com.example.grpc.GreetingServiceOuterClass.HelloRequest,
       com.example.grpc.GreetingServiceOuterClass.HelloResponse> METHOD_GREETING =
       io.grpc.MethodDescriptor.<com.example.grpc.GreetingServiceOuterClass.HelloRequest, com.example.grpc.GreetingServiceOuterClass.HelloResponse>newBuilder()
-          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+          .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
           .setFullMethodName(generateFullMethodName(
               "com.example.grpc.GreetingService", "greeting"))
           .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
@@ -78,7 +78,7 @@ public final class GreetingServiceGrpc {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
             METHOD_GREETING,
-            asyncUnaryCall(
+            asyncServerStreamingCall(
               new MethodHandlers<
                 com.example.grpc.GreetingServiceOuterClass.HelloRequest,
                 com.example.grpc.GreetingServiceOuterClass.HelloResponse>(
@@ -109,7 +109,7 @@ public final class GreetingServiceGrpc {
      */
     public void greeting(com.example.grpc.GreetingServiceOuterClass.HelloRequest request,
         io.grpc.stub.StreamObserver<com.example.grpc.GreetingServiceOuterClass.HelloResponse> responseObserver) {
-      asyncUnaryCall(
+      asyncServerStreamingCall(
           getChannel().newCall(METHOD_GREETING, getCallOptions()), request, responseObserver);
     }
   }
@@ -134,8 +134,9 @@ public final class GreetingServiceGrpc {
 
     /**
      */
-    public com.example.grpc.GreetingServiceOuterClass.HelloResponse greeting(com.example.grpc.GreetingServiceOuterClass.HelloRequest request) {
-      return blockingUnaryCall(
+    public java.util.Iterator<com.example.grpc.GreetingServiceOuterClass.HelloResponse> greeting(
+        com.example.grpc.GreetingServiceOuterClass.HelloRequest request) {
+      return blockingServerStreamingCall(
           getChannel(), METHOD_GREETING, getCallOptions(), request);
     }
   }
@@ -156,14 +157,6 @@ public final class GreetingServiceGrpc {
     protected GreetingServiceFutureStub build(io.grpc.Channel channel,
         io.grpc.CallOptions callOptions) {
       return new GreetingServiceFutureStub(channel, callOptions);
-    }
-
-    /**
-     */
-    public com.google.common.util.concurrent.ListenableFuture<com.example.grpc.GreetingServiceOuterClass.HelloResponse> greeting(
-        com.example.grpc.GreetingServiceOuterClass.HelloRequest request) {
-      return futureUnaryCall(
-          getChannel().newCall(METHOD_GREETING, getCallOptions()), request);
     }
   }
 
