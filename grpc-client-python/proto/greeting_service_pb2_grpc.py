@@ -15,10 +15,10 @@ class GreetingServiceStub(object):
             channel: A grpc.Channel.
         """
         self.greeting = channel.unary_unary(
-                '/com.example.grpc.GreetingService/greeting',
-                request_serializer=greeting__service__pb2.HelloRequest.SerializeToString,
-                response_deserializer=greeting__service__pb2.HelloResponse.FromString,
-                )
+            '/com.example.grpc.GreetingService/greeting',
+            request_serializer=greeting__service__pb2.HelloRequest.SerializeToString,
+            response_deserializer=greeting__service__pb2.HelloResponse.FromString,
+        )
 
 
 class GreetingServiceServicer(object):
@@ -33,34 +33,34 @@ class GreetingServiceServicer(object):
 
 def add_GreetingServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'greeting': grpc.unary_unary_rpc_method_handler(
-                    servicer.greeting,
-                    request_deserializer=greeting__service__pb2.HelloRequest.FromString,
-                    response_serializer=greeting__service__pb2.HelloResponse.SerializeToString,
-            ),
+        'greeting': grpc.unary_unary_rpc_method_handler(
+            servicer.greeting,
+            request_deserializer=greeting__service__pb2.HelloRequest.FromString,
+            response_serializer=greeting__service__pb2.HelloResponse.SerializeToString,
+        ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'com.example.grpc.GreetingService', rpc_method_handlers)
+        'com.example.grpc.GreetingService', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
- # This class is part of an EXPERIMENTAL API.
+# This class is part of an EXPERIMENTAL API.
 class GreetingService(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
     def greeting(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                 target,
+                 options=(),
+                 channel_credentials=None,
+                 call_credentials=None,
+                 insecure=False,
+                 compression=None,
+                 wait_for_ready=None,
+                 timeout=None,
+                 metadata=None):
         return grpc.experimental.unary_unary(request, target, '/com.example.grpc.GreetingService/greeting',
-            greeting__service__pb2.HelloRequest.SerializeToString,
-            greeting__service__pb2.HelloResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             greeting__service__pb2.HelloRequest.SerializeToString,
+                                             greeting__service__pb2.HelloResponse.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
