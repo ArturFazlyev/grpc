@@ -1,7 +1,6 @@
 import grpc
 
-import greeting_service_pb2_grpc
-import greeting_service_pb2
+from proto import greeting_service_pb2_grpc, greeting_service_pb2
 
 
 def run():
