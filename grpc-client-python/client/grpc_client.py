@@ -9,5 +9,6 @@ def run():
         response = stub.greeting(greeting_service_pb2.HelloRequest(name='test'))
         print(f"Greeting from server: " + response.greeting)
 
+
 if __name__ == '__main__':
     run()
